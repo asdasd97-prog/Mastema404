@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETWORK PROTOCOL ERROR - 404</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #030303;
+            color: #d0d0d0;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CRT Monitör Çizgi Efekti */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 10;
+            background-size: 100% 3px, 6px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .error-title {
+            color: #cc0000;
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px rgba(204, 0, 0, 0.8), 2px 2px 0px #000;
+            margin-bottom: 25px;
+            animation: glitch 1.5s infinite alternate;
+        }
+
+        .status-msg {
+            color: #aaaaaa;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .ip-box {
+            color: #d4af37; /* Görseldeki sarımtırak IP rengi */
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .final-threat {
+            color: #ff0000;
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-top: 20px;
+            text-shadow: 0 0 12px rgba(255, 0, 0, 0.9);
+            animation: pulse 1s infinite alternate;
+        }
+
+        .terminal-log {
+            font-size: 0.85rem;
+            color: #444;
+            margin-top: 40px;
+            text-align: left;
+            display: inline-block;
+            font-family: monospace;
+            line-height: 1.4;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: 2px 0 red, -2px 0 blue; }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-1px, -2px); text-shadow: -2px 0 red, 2px 0 blue; }
+            60% { transform: translate(2px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            100% { transform: translate(0); text-shadow: 2px 0 red, -2px 0 blue; }
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.7; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="error-title">NETWORK PROTOCOL ERROR</div>
+        
+        <div class="status-msg">Connection hijacked...</div>
+        
+        <div class="ip-box">
+            Target IP Detected: <span id="ip-address">46.197.20.16</span>
+        </div>
+        
+        <div class="final-threat">WE FOUND YOU.</div>
+
+        <div class="terminal-log">
+            [SYS_ERR]: mastema_404 breach registered.<br>
+            [NET_LOG]: Local socket forced open.<br>
+            [STATUS]: Connection terminated by host.
+        </div>
+    </div>
+
+    <script>
+        // Sayfaya giren kişinin IP adresini gerçek zamanlı çekme
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                if(data.ip) {
+                    document.getElementById('ip-address').innerText = data.ip;
+                }
+            })
+            .catch(() => {
+                // Hata durumunda varsayılan IP kalır
+            });
+    </script>
+</body>
+</html>
